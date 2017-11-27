@@ -7,7 +7,7 @@ output:
 
 
 ## Loading and preprocessing the data
-First we include the necessary libraries (*data.table* and *lattice*), then load the data and convert the date feature from a string to a Date.
+First we include the necessary libraries (*data.table* and *lattice*), then load the data and convert the date feature from a string to a Date. Note that the csv file should be extracted and in the working directory.
 ```{r}
 # Import required libraries
 library(data.table)
@@ -76,8 +76,13 @@ data <- median_spdi[data]
 # Then replace the NA values with the appropriate value
 data$steps[is.na(data$steps)] <- data$median_steps[is.na(data$steps)]
 ```
-## Are there differences in activity patterns between weekdays and weekends?
-Finally, we repeat the analysis with the imputed values.
+And recalculate the number of NA values.
+```{r}
+# Report the number of NA values
+sum(is.na(data$steps))
+```
+
+We then repeat the analysis with the imputed values.
 ```{r}
 # Repeat histogram of number of steps per day
 steps_per_day <- aggregate(data$steps,list(data$date),sum)
@@ -88,12 +93,16 @@ hist(steps_per_day$steps, col = "red", xlab = "Steps",main = "Frequency of numbe
 mean_spd_new <- mean(steps_per_day$steps)
 median_spd_new <- median(steps_per_day$steps)
 ```
-And plot the difference between average interval-step patterns on the weekend and weekdays.
+The previous mean steps per day was `r mean_spd`, the new mean is `r mean_spd_new`. 
+The previous median steps per day was `r median_spd`, the new median is `r median_spd_new`.
+
+## Are there differences in activity patterns between weekdays and weekends?
+Finally, plot the difference between average interval-step patterns on the weekend and weekdays.
 ```{r}
 # Designate weekday or weekend
 data$weekend <- factor(data$weekday %in% c("Saturday", "Sunday"), labels = c("Weekday","Weekend"))
 mean_spiw <- aggregate(data$steps, list(data$weekend,data$interval), mean)
 names(mean_spiw) <- c("weekend", "interval", "steps") 
 # Plot the average number of steps during the week and on weekends
-xyplot( steps~interval | weekend, data = mean_spiw, type='l',ylab = "Number of Steps", xlab = "Interval")
+xyplot( steps~interval | weekend, data = mean_spiw, type='l',ylab = "Number of Steps", xlab = "Interval", layout = c(1,2))
 ```
