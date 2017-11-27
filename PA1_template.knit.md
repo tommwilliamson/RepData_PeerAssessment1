@@ -38,6 +38,19 @@ hist(steps_per_day$steps, col = "red", xlab = "Steps",main = "Frequency of numbe
 # Calculate mean and median number of steps per day
 mean_spd <- mean(steps_per_day$steps, na.rm = TRUE)
 median_spd <- median(steps_per_day$steps, na.rm = T)
+print(mean_spd)
+```
+
+```
+## [1] 9354.23
+```
+
+```r
+print(median_spd)
+```
+
+```
+## [1] 10395
 ```
 We also evaluate how the total number of steps per day has changed throughout the monitoring period.
 

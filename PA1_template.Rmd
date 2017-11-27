@@ -22,7 +22,7 @@ data$date <- as.Date(data$date)
 
 ## What is mean total number of steps taken per day?
 Next we calculate the mean and median number of steps per day, ignoring NA values, and plot a histogram of the steps per day values.
-```{r}
+```{r, echo=TRUE}
 # Calculate total number of steps per day
 steps_per_day <- aggregate(data$steps,list(data$date), sum, na.rm = TRUE)
 names(steps_per_day) <- c("date", "steps")
@@ -31,9 +31,11 @@ hist(steps_per_day$steps, col = "red", xlab = "Steps",main = "Frequency of numbe
 # Calculate mean and median number of steps per day
 mean_spd <- mean(steps_per_day$steps, na.rm = TRUE)
 median_spd <- median(steps_per_day$steps, na.rm = T)
+print(mean_spd)
+print(median_spd)
 ```
 We also evaluate how the total number of steps per day has changed throughout the monitoring period.
-```{r}
+```{r, echo=TRUE}
 # Plot time series of steps per day
 plot(steps_per_day$date,steps_per_day$steps,type = 'l', xlab = "Date", ylab = "Number of Steps", main = "Number of steps over time")
 ```
