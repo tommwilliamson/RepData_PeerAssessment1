@@ -56,6 +56,8 @@ points(mean_spi$interval, mean_spi$steps,type ='l')
 points(mean_spi$interval[max_interval], mean_spi$steps[max_interval],type ='o', col ="red")
 ```
 
+The interval with the max number of steps is `r data$interval[max_interval]`.
+
 ## Imputing missing values
 First we calculate the total number of NA values.
 ```{r}

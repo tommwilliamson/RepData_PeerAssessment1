@@ -80,6 +80,8 @@ points(mean_spi$interval[max_interval], mean_spi$steps[max_interval],type ='o', 
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
+The interval with the max number of steps is 835.
+
 ## Imputing missing values
 First we calculate the total number of NA values.
 
